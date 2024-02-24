@@ -2,6 +2,7 @@
 ![](https://github.com/shuunnichi/aaaaaaaa/blob/main/2024-02-24%20114515.png)
 
 
+
 **本文**
 ```
 #include <WiFi.h>
