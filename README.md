@@ -1,7 +1,6 @@
 **対応表**
-※追記
-**右スティック押込み:3**
-![](https://github.com/shuunnichi/aaaaaaaa/blob/main/2024-02-24%20114515.png)
+
+![aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa](https://github.com/shuunnichi/aaaaaaaa/blob/main/image.png)
 
 
 
