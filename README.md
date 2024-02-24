@@ -1,5 +1,5 @@
 **対応表**
-
+赤が大文字青が小文字
 ![aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa](https://github.com/shuunnichi/aaaaaaaa/blob/main/image.png)
 
 
