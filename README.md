@@ -12,192 +12,94 @@
 #include <WiFiUdp.h>
 #include <PS4Controller.h>
 
-
 const char *ssid = "GL-SFT1200-19f";
 const char *password = "goodlife";
 
 WiFiUDP udp;
-
-
-
 
 void setup() {
   Serial.begin(115200);
   PS4.begin("70:b8:f6:5c:80:16");
   WiFi.begin(ssid, password);
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("つないでるぜ");
-  }
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   delay(1000);
+  //   Serial.println("つないでるぜ");
+  // }
 
   Serial.println("つながったぜ");
 }
 
+extern void print_and_udp(char *buf, char flag, int val);
 
 void loop() {
   if (PS4.isConnected()) {
-    if (PS4.Right()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "D");
-      Serial.println("D");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
+    if (PS4.Right()) print_and_udp("D", 0, 0);
+    if (PS4.Left()) print_and_udp("A", 0, 0);
+    if (PS4.Up()) print_and_udp("W", 0, 0);
+    if (PS4.Down()) print_and_udp("S", 0, 0);
+    if (PS4.Circle()) print_and_udp("d", 0, 0);
+    if (PS4.Square()) print_and_udp("a", 0, 0);
+    if (PS4.Triangle()) print_and_udp("w", 0, 0);
+    if (PS4.Cross()) print_and_udp("s", 0, 0);
+    if (PS4.L1()) print_and_udp("k", 0, 0);
+    if (PS4.R1()) print_and_udp("y", 0, 0);
+    if (PS4.L3()) print_and_udp("2", 0, 0);
+    if (PS4.R3()) print_and_udp("3", 0, 0);
+
+    if (PS4.R2()) {
+      int R2 = PS4.R2Value();
+      if (R2 > 90) print_and_udp("h", 0, 0);
     }
-    if (PS4.Left()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "A");
-      Serial.println("A");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    }
-    if (PS4.Up()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "W");
-      Serial.println("W");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    }
-    if (PS4.Down()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "S");
-      Serial.println("S");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
+    if (PS4.L2()) {
+      int L2 = PS4.L2Value();
+      if (L2 > 90) print_and_udp("o", 0, 0);
     }
 
-    if (PS4.Circle()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "d");
-      Serial.println("d");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
+    int gosa = 12;
+
+    int Lx = PS4.LStickX();
+    if (Lx < gosa && Lx > -gosa) {
+      print_and_udp("L", 1, 0);
+    } else {
+      print_and_udp("L", 1, Lx);
     }
-    if (PS4.Square()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "a");
-      Serial.println("a");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
+    int Ly = PS4.LStickY();
+    if (Ly < gosa && Ly > -gosa) {
+      print_and_udp("l", 1, 0);
+    } else {
+      print_and_udp("l", 1, Ly);
     }
-    if (PS4.Triangle()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "w");
-      Serial.println("w");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
+    int Rx = PS4.RStickX();
+    if (Rx < gosa && Rx > -gosa) {
+      print_and_udp("R", 1, 0);
+    } else {
+      print_and_udp("R", 1, Rx);
     }
-    if (PS4.Cross()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "s");
-      Serial.println("s");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
+    int Ry = PS4.RStickY();
+    if (Ry < gosa && Ry > -gosa) {
+      print_and_udp("r", 1, 0);
+    } else {
+      print_and_udp("r", 1, Ry);
     }
 
-
-    if (PS4.LStickX()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "L%d\n", PS4.LStickX());  /////    L:leftx
-      Serial.printf("L%d\n", PS4.LStickX());
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    } else {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "L0\n");
-      Serial.printf("L0\n");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    }
-    if (PS4.LStickY()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "l%d\n", PS4.LStickY());  //   l:lefty
-      Serial.printf("l%d\n", PS4.LStickY());
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    } else {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "l0\n");
-      Serial.printf("l0\n");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    }
-    if (PS4.RStickX()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "R%d\n", PS4.RStickX());  //   R:rightx
-      Serial.printf("R%d\n", PS4.RStickX());
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    } else {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "R0\n");
-      Serial.printf("R0\n");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    }
-    if (PS4.RStickY()) {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "r%d\n", PS4.RStickY());  //   r:righty
-      Serial.printf("r%d\n", PS4.RStickY());
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    } else {
-      static int count = 0;
-      char buffer[255];
-      sprintf(buffer, "r0\n");
-      Serial.printf("r0\n");
-      udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
-      udp.print(buffer);
-      udp.print("\n");
-      udp.endPacket();
-    }
-    // delay(100);
+    delay(10);
   }
+}
+
+void print_and_udp(char *buf, char flag, int val) {
+
+  char buffer[16];
+  if (flag) {
+    sprintf(buffer, "%s%d", buf, val);
+  } else {
+    sprintf(buffer, "%s", buf);
+  }
+  Serial.printf(buffer);
+  udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
+  udp.print(buffer);
+  udp.print("\n");
+  udp.endPacket();
 }
 ```
 ***その他リンク***
