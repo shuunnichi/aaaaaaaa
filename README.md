@@ -39,48 +39,48 @@ void loop() {
     if (PS4.Up()) print_and_udp("WWWWWWWWWW", 0, 0);
     if (PS4.Down()) print_and_udp("SSSSSSSSSS", 0, 0);
     if (PS4.Circle()) print_and_udp("dddddddddd", 0, 0);
-    if (PS4.Square()) print_and_udp("a", 0, 0);
-    if (PS4.Triangle()) print_and_udp("w", 0, 0);
-    if (PS4.Cross()) print_and_udp("s", 0, 0);
-    if (PS4.L1()) print_and_udp("k", 0, 0);
-    if (PS4.R1()) print_and_udp("y", 0, 0);
-    if (PS4.L3()) print_and_udp("2", 0, 0);
-    if (PS4.R3()) print_and_udp("3", 0, 0);
+    if (PS4.Square()) print_and_udp("aaaaaaaaaa", 0, 0);
+    if (PS4.Triangle()) print_and_udp("wwwwwwwwww", 0, 0);
+    if (PS4.Cross()) print_and_udp("ssssssssss", 0, 0);
+    if (PS4.L1()) print_and_udp("kkkkkkkkkk", 0, 0);
+    if (PS4.R1()) print_and_udp("yyyyyyyyyy", 0, 0);
+    if (PS4.L3()) print_and_udp("2222222222", 0, 0);
+    if (PS4.R3()) print_and_udp("3333333333", 0, 0);
 
     if (PS4.R2()) {
       int R2 = PS4.R2Value();
-      if (R2 > 90) print_and_udp("h", 0, 0);
+      if (R2 > 90) print_and_udp("hhhhhhhhhh", 0, 0);
     }
     if (PS4.L2()) {
       int L2 = PS4.L2Value();
-      if (L2 > 90) print_and_udp("o", 0, 0);
+      if (L2 > 90) print_and_udp("oooooooooo", 0, 0);
     }
 
     int gosa = 12;
 
     int Lx = PS4.LStickX();
     if (Lx < gosa && Lx > -gosa) {
-      print_and_udp("L", 1, 0);
+      print_and_udp("LLLLLLLLLL", 1, 0);
     } else {
-      print_and_udp("L", 1, Lx);
+      print_and_udp("LLLLLLLLLL", 1, Lx);
     }
     int Ly = PS4.LStickY();
     if (Ly < gosa && Ly > -gosa) {
-      print_and_udp("l", 1, 0);
+      print_and_udp("llllllllll", 1, 0);
     } else {
-      print_and_udp("l", 1, Ly);
+      print_and_udp("llllllllll", 1, Ly);
     }
     int Rx = PS4.RStickX();
     if (Rx < gosa && Rx > -gosa) {
-      print_and_udp("R", 1, 0);
+      print_and_udp("RRRRRRRRRR", 1, 0);
     } else {
-      print_and_udp("R", 1, Rx);
+      print_and_udp("RRRRRRRRRR", 1, Rx);
     }
     int Ry = PS4.RStickY();
     if (Ry < gosa && Ry > -gosa) {
-      print_and_udp("r", 1, 0);
+      print_and_udp("rrrrrrrrrr", 1, 0);
     } else {
-      print_and_udp("r", 1, Ry);
+      print_and_udp("rrrrrrrrrr", 1, Ry);
     }
 
     delay(10);
