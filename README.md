@@ -22,10 +22,10 @@ void setup() {
   PS4.begin("70:b8:f6:5c:80:16");
   WiFi.begin(ssid, password);
 
-  // while (WiFi.status() != WL_CONNECTED) {
-  //   delay(1000);
-  //   Serial.println("つないでるぜ");
-  // }
+  while (WiFi.status() != WL_CONNECTED) {
+     delay(1000);
+     Serial.println("つないでるぜ");
+  }
 
   Serial.println("つながったぜ");
 }
