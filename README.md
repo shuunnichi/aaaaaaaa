@@ -34,11 +34,11 @@ extern void print_and_udp(char *buf, char flag, int val);
 
 void loop() {
   if (PS4.isConnected()) {
-    if (PS4.Right()) print_and_udp("D", 0, 0);
-    if (PS4.Left()) print_and_udp("A", 0, 0);
-    if (PS4.Up()) print_and_udp("W", 0, 0);
-    if (PS4.Down()) print_and_udp("S", 0, 0);
-    if (PS4.Circle()) print_and_udp("d", 0, 0);
+    if (PS4.Right()) print_and_udp("DDDDDDDDDD", 0, 0);
+    if (PS4.Left()) print_and_udp("AAAAAAAAAA", 0, 0);
+    if (PS4.Up()) print_and_udp("WWWWWWWWWW", 0, 0);
+    if (PS4.Down()) print_and_udp("SSSSSSSSSS", 0, 0);
+    if (PS4.Circle()) print_and_udp("dddddddddd", 0, 0);
     if (PS4.Square()) print_and_udp("a", 0, 0);
     if (PS4.Triangle()) print_and_udp("w", 0, 0);
     if (PS4.Cross()) print_and_udp("s", 0, 0);
