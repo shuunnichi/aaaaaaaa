@@ -21,12 +21,12 @@ void setup() {
   Serial.begin(115200);
   PS4.begin("70:b8:f6:5c:80:16");
   WiFi.begin(ssid, password);
-
+#if 0
   while (WiFi.status() != WL_CONNECTED) {
      delay(1000);
      Serial.println("つないでるぜ");
   }
-
+#endif
   Serial.println("つながったぜ");
 }
 
@@ -60,27 +60,27 @@ void loop() {
 
     int Lx = PS4.LStickX();
     if (Lx < gosa && Lx > -gosa) {
-      print_and_udp("LLLLLLLLLL", 1, 0);
+      print_and_udp("L", 1, 0);
     } else {
-      print_and_udp("LLLLLLLLLL", 1, Lx);
+      print_and_udp("L", 1, Lx);
     }
     int Ly = PS4.LStickY();
     if (Ly < gosa && Ly > -gosa) {
-      print_and_udp("llllllllll", 1, 0);
+      print_and_udp("l", 1, 0);
     } else {
-      print_and_udp("llllllllll", 1, Ly);
+      print_and_udp("l", 1, Ly);
     }
     int Rx = PS4.RStickX();
     if (Rx < gosa && Rx > -gosa) {
-      print_and_udp("RRRRRRRRRR", 1, 0);
+      print_and_udp("R", 1, 0);
     } else {
-      print_and_udp("RRRRRRRRRR", 1, Rx);
+      print_and_udp("R", 1, Rx);
     }
     int Ry = PS4.RStickY();
     if (Ry < gosa && Ry > -gosa) {
-      print_and_udp("rrrrrrrrrr", 1, 0);
+      print_and_udp("r", 1, 0);
     } else {
-      print_and_udp("rrrrrrrrrr", 1, Ry);
+      print_and_udp("r", 1, Ry);
     }
 
     delay(10);
@@ -99,6 +99,7 @@ void print_and_udp(char *buf, char flag, int val) {
   udp.beginPacket(IPAddress(192, 168, 8, 116), 1234);  // IP address and port of the receiver ESP32
   udp.print(buffer);
   udp.print("\n");
+  Serial.printf("\n");
   udp.endPacket();
 }
 ```
