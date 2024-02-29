@@ -12,7 +12,7 @@ WiFiUDP udp;
 
 void setup() {
   Serial.begin(115200);
-  PS4.begin("70:b8:f6:5c:80:16");
+  PS4.begin("b8:d6:1a:bc:ee:7a");
   WiFi.begin(ssid, password);
 #if 0
   while (WiFi.status() != WL_CONNECTED) {
